@@ -3,146 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>step</title>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="jquery-step.css">
     <style>
-        .step-container{
-            background-color: antiquewhite;
-            border: 1px solid;
-            height: 50px;
-            counter-reset:step;
-        }
-        .step{
-            color: #0d90e2;
-            background-color: aqua;
-            text-align: center;
-            height: inherit;
-            display: inline-block;
-            counter-increment:step;
-            position: relative;
-        }
-        .step::before{
-            background-color: currentColor;
-            display: block;
-            position: absolute;
-            top:47%;
-            bottom:47%;
-            left: 0;
-            right: 0;
-            margin: auto;
-            content: "";
-        }
-        .step-identifier{
-            width: 1.5em;
-            height: 1.5em;
-            border-radius: 50%;
-            background-color: currentColor;
-            display: inline-block;
-            vertical-align: middle;
-            position: relative;
-        }
-        .step-identifier::before{
-            content: counter(step);
-            color: white;
-            display: inline-block;
-        }
-        .step::after,.step-identifier::after{
-            height: inherit;
-            width: 0;
-            vertical-align: middle;
-            display: inline-block;
-            content: "";
+        #step1{
+            margin-bottom: 100px;
         }
     </style>
 </head>
 <body>
+    <div id="step1"></div>
+    <div id="step2"></div>
     <script src="jquery-1.12.4.min.js"></script>
-    <div id="step"  class="step-container">
-    </div>
+    <script src="jquery-step.js"></script>
     <script>
-        (function($){
-            if($.fn.step){
-                return;
-            }
-            var setMethods={
-
-            };
-            var getMethods={
-
-            };
-            $.fn.step=function(){
-                var args=arguments,params,method;
-                if(!args.length|| typeof args[0] == 'object'){
-                    return this.each(function(idx){
-                        var $self=$(this);
-                        $self.data('step',$.extend(true,{},$.fn.step["default"],args[0]));
-                        params=$self.data('step');
-                        _init.call( $self,params);
-                        _render.call($self);
-                    });
-                }else{
-                    if(!$(this).data('step')){
-                        throw new Error('You has not init step!');
-                    }
-                    params=Array.prototype.slice.call(args,1);
-                    if (setMethods.hasOwnProperty(args[0])){
-                        method=setMethods[args[0]];
-                        return this.each(function(idx){
-                            var $self=$(this);
-                            method.apply($self,params);
-                            _render.call($self);
-                        });
-                    }else if(getMethods.hasOwnProperty(args[0])){
-                        method=getMethods[args[0]];
-                        return method.apply(this,params);
-                    }else{
-                        throw new Error('There is no such method');
-                    }
-                }
-            }
-            $.fn.step["default"]={
-                datas:[{
-                    "identifier":"",
-                    "describe":"找回密码"
-                },{
-                    "identifier":"",
-                    "describe":"选择重置方式"
-                },{
-                    "identifier":"",
-                    "describe":"重置密码"
-                },{
-                    "identifier":"",
-                    "describe":"完成"
-                }]
-            }
-            function _init(params){
-                return this;
-            }
-            function _render(){
-                var $self=this,
-                        params=$self.data("step"),
-                        datas=params.datas||[],
-                        preWidth=100/datas.length+"%";
-                console.log(this);
-                console.log(params);
-                $self.html(
-                    datas.map(function(data){
-                        var step = $("<div/>",{
-                            "class":"step"
-                        }).append(
-                            function(){
-                                if(!data.identifier){
-                                    return $("<span/>",{
-                                        "class":"step-identifier"
-                                    })
-                                }
-                            }()
-                        )
-                        step.css({"width":preWidth});
-                        return  step;
-                    })
-                )
-            }
-        })(jQuery);
-        $("#step").step();
+        $("#step1").step({
+            height:50,
+            mark:"number",
+            position:"center",
+            markPosition:"top",
+            datas:[{
+                "text":"找回密码"
+            },{
+                "text":"选择重置方式"
+            },{
+                "text":"重置密码"
+            },{
+                "text":"完成"
+            }]
+        });
+        $("#step2").step({
+            height:100,
+            position:"left",
+            iconFormatter:function(icon,data){
+                return $("<span/>",{
+                    "class":icon,
+                    "style":"font-size:32px;margin-bottom:10px"
+                })
+            },
+            datas:[{
+                "text":"任务选取",
+                "icon":"fa fa-th-list"
+            },{
+                "text":"资产脆弱性分析",
+                "icon":"fa fa-pie-chart"
+            },{
+                "text":"省单位验证",
+                "icon":"fa fa-shield"
+            },{
+                "text":"总部复查",
+                "icon":"fa fa-search-plus"
+            }]
+        });
+        $("#step2").step("check",[0,2]);
     </script>
 </body>
 </html>

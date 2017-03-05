@@ -1,0 +1,86 @@
+.step-container{
+    color: #b4b4b4;
+    text-align: center;
+    white-space: nowrap;
+}
+.step{
+    height: inherit;
+    display: inline-block;
+    position: relative;
+}
+.step-top{
+    top:0
+}
+.step-bottom{
+    bottom:0;
+}
+.step-mark-container{
+    height: 1.5em;
+    position: absolute;
+    margin: auto;
+    left:0;
+    right:0;
+}
+.step-mark-container-left{
+    text-align: left;
+}
+.step-mark-bg{
+    height: 3px;
+    background-color: currentColor;
+    position: absolute;
+    margin: auto;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
+.step-mark{
+    width: 1.5em;
+    height: inherit;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    text-align: center;
+}
+.step-mark-inner{
+    width: inherit;
+    height: inherit;
+    display: inline-block;
+    position: relative;
+}
+.step-mark-symbol{
+    background-color: #e4e4e4;
+    border-radius:50%;
+    vertical-align: middle;
+    position: relative;
+    width: inherit;
+    height: inherit;
+    display: inline-block;
+}
+.step-mark-symbol-content{
+    font-weight: bold;
+    vertical-align: middle;
+}
+.step-content-container{
+    position: absolute;
+}
+.step-content-inner{
+    text-align: center;
+    width: inherit;
+    position: relative;
+}
+.step-check{
+    color: #0b93e9;
+}
+.step-check .step-mark-symbol{
+    background-color:#0b93e9;
+    color:#fff;
+}
+.step-left{
+    left: -50%;
+}
+.step-center{
+    left: 0;
+    right: 0;
+    text-align: center;
+}
